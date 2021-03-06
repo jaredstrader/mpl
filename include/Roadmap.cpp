@@ -109,7 +109,7 @@ getPath(const std::vector<double> & start,
   }
 
   //search graph for shortest path
-  G_->algDijkstras(start_idx);
+  G_->runDijkstras(start_idx);
 };
 
 std::vector< std::vector<double> > Roadmap::

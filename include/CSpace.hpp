@@ -18,6 +18,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <cassert>
 
 namespace mpl
 {
@@ -40,11 +41,6 @@ class CSpace {
      /** \brief */
      const std::vector<double> getMaximums() const {return maximums_;};
 
-    /** \brief Runs Python script for 1) defining the minimum and maximum 
-    values for each dimension of configuration space and 2) selecting points
-    for defining polygons for obstacles */
-    bool defineConfigurationSpaceAndObstacles();
-
     /** \brief Load minimum and maximum values for each dimension of 
     configuration space from specified file */
     bool loadConfigurationSpace(std::string filepath);
@@ -61,9 +57,6 @@ class CSpace {
     configuration space and false if configuration config is in the interior 
     of an obstacle*/
     bool isFree(std::vector<double> pt) const;
-
-    /** \brief Runs CSpaceHelper.py to launch GUI for testing isFree()*/
-    bool testIsFree() const;
 
   private:
     /** \brief Struct for defining obstacles where pts[i] is a vector 

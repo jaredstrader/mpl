@@ -41,8 +41,6 @@ add_subdirectory(graph)
 #######################
 add_library(mpl
 	include/Roadmap.cpp
-	include/Graph.cpp
-	include/Edge.cpp
 	include/CSpace.cpp)
 
 target_link_libraries(mpl 
@@ -54,19 +52,7 @@ add_library(utils include/utils.cpp)
 ########################
 ########Examples########
 ########################
-add_executable(test_graph src/test_graph.cpp)
-target_link_libraries(test_graph 
-	mpl
-	utils
- )
-
-add_executable(test_isfree src/test_isfree.cpp)
-target_link_libraries(test_isfree 
-	mpl
-	utils
- )
-
-add_executable(test_roadmap src/test_roadmap.cpp)
+add_executable(test_roadmap tests/test_roadmap.cpp)
 target_link_libraries(test_roadmap 
 	mpl
 	utils
