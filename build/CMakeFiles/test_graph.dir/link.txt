@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3 -std=c++11  -rdynamic CMakeFiles/test_graph.dir/src/test_graph.cpp.o  -o bin/test_graph lib/libmpl.a lib/libutils.a -lPyHelper 

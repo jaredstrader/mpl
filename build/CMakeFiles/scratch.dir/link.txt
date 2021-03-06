@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3 -std=c++11  -rdynamic CMakeFiles/scratch.dir/src/scratch.cpp.o  -o bin/scratch lib/libmpl.a lib/libutils.a -lPyHelper 
