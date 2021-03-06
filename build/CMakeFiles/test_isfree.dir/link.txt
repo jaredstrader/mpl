@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -std=c++11  -rdynamic CMakeFiles/test_isfree.dir/src/test_isfree.cpp.o  -o bin/test_isfree lib/libmpl.a lib/libutils.a -lPyHelper 
