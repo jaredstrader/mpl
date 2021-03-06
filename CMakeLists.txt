@@ -28,7 +28,13 @@ INCLUDE_DIRECTORIES(
 	${PROJECT_SOURCE_DIR}
 	${PYTHON_INCLUDE_DIRS}
 	/usr/include/python2.7/
+	graph/include
 )
+
+###########################
+#######SUBDIRECTORY########
+###########################
+add_subdirectory(graph)
 
 #######################
 ########Library########
@@ -39,6 +45,10 @@ add_library(mpl
 	include/Edge.cpp
 	include/CSpace.cpp)
 
+target_link_libraries(mpl 
+	graph
+ )
+
 add_library(utils include/utils.cpp)
 
 ########################
@@ -48,28 +58,24 @@ add_executable(test_graph src/test_graph.cpp)
 target_link_libraries(test_graph 
 	mpl
 	utils
-	PyHelper
  )
 
 add_executable(test_isfree src/test_isfree.cpp)
 target_link_libraries(test_isfree 
 	mpl
 	utils
-	PyHelper
  )
 
 add_executable(test_roadmap src/test_roadmap.cpp)
 target_link_libraries(test_roadmap 
 	mpl
 	utils
-	PyHelper
  )
 
 add_executable(scratch src/scratch.cpp)
 target_link_libraries(scratch 
 	mpl
 	utils
-	PyHelper
  )
 
 #########################
