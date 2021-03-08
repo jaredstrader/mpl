@@ -27,6 +27,6 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
 
 To choose the default for `gcc` or `g++`:
 ```
-update-alternatives --config g++
 update-alternatives --config gcc
+update-alternatives --config g++
 ```
