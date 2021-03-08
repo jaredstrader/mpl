@@ -4,7 +4,7 @@ Simple motion planning library in C++
 ## Dependencies
 
 # Compiler
-This requires c++17. While g++-8 supports c++17, g++-10 is required. To check the version of gcc and g++:
+This requires c++17. While g++-8 supports c++17 (and is default on Ubuntu 18.04), g++-10 is required and earlier version do not appear to work. To check the version of gcc and g++:
 ```
 g++ --version
 gcc --version
