@@ -30,3 +30,6 @@ To choose the default for `gcc` or `g++`:
 update-alternatives --config gcc
 update-alternatives --config g++
 ```
+
+### MatPlot++
+[Matplot++ v1.0.1](https://github.com/alandefreitas/matplotplusplus/releases) is required for visualization, but in the future, this requirement will be optional. For now, build and install the latest version of Matplot++ as described [here](https://alandefreitas.github.io/matplotplusplus/integration/install/build-from-source/build-and-install/).
