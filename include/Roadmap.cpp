@@ -14,6 +14,10 @@
 namespace mpl
 {
 
+//////////////////////////////////////////////////////////////////////////////
+//                                PUBLIC
+//////////////////////////////////////////////////////////////////////////////
+
 void Roadmap::
 runPRM(int iterations, double radius, double step_size) {
   run(iterations, radius, step_size, UNIFORM);
@@ -29,6 +33,43 @@ runLRM(int iterations, double radius, double step_size) {
   run(iterations, radius, step_size, LATTICE);
 };
 
+// void Roadmap::
+// addVertex(std::vector<double> point) {};
+
+void Roadmap::
+computePath(const std::vector<double> & start, 
+            const std::vector<double> & goal) {
+  double max_val;
+
+  //index of start vertex
+  max_val = 1e9;
+  double start_idx = -1;
+  for(int i=0; i<samples_.size(); i++) {
+    double val = utils::dist(start, samples_[i]);
+    if(val < max_val) {
+      max_val = val;
+      start_idx = i;
+    }
+  }
+
+  //index of goal vertex
+  max_val = 1e9;
+  double goal_idx = -1;
+  for(int i=0; i<samples_.size(); i++) {
+    double val = utils::dist(goal, samples_[i]);
+    if(val < max_val) {
+      max_val = val;
+      goal_idx = i;
+    }
+  }
+
+  //search graph for shortest path
+  G_->runDijkstras(start_idx);
+};
+
+//////////////////////////////////////////////////////////////////////////////
+//                                PRIVATE
+//////////////////////////////////////////////////////////////////////////////
 void Roadmap::
 run(int iterations, double radius, double step_size, int sample_type) {
   //sample points in configuration space
@@ -59,57 +100,19 @@ run(int iterations, double radius, double step_size, int sample_type) {
 
         //check if path is collision free
         std::vector< std::vector<double> > path;
-        bool success = steer(samples_[i], samples_[j], radius, step_size, path);
+        bool success = true; //steer(samples_[i], samples_[j], radius, step_size, path);
 
         //if collision free, add edge with weight
         if(success) {
           double w = utils::dist(samples_[i], samples_[j]);
           G_->addEdgeDirected(i,j,w);
         }
+        else{
+          std::cout << "fail" << std::endl;
+        }
       }
     }
   }
-
-  //print edges
-  // G_->printEdges();
-
-  // Plotter plotter;
-  // plotter.plotRoadmap(samples_, G_->getEdges());
-  // plotter.plotRoadmap();
-};
-
-// void Roadmap::
-// addVertex(std::vector<double> point) {};
-
-void Roadmap::
-getPath(const std::vector<double> & start, 
-        const std::vector<double> & goal) {
-  double max_val;
-
-  //index of start vertex
-  max_val = 1e9;
-  double start_idx = -1;
-  for(int i=0; i<samples_.size(); i++) {
-    double val = utils::dist(start, samples_[i]);
-    if(val < max_val) {
-      max_val = val;
-      start_idx = i;
-    }
-  }
-
-  //index of goal vertex
-  max_val = 1e9;
-  double goal_idx = -1;
-  for(int i=0; i<samples_.size(); i++) {
-    double val = utils::dist(goal, samples_[i]);
-    if(val < max_val) {
-      max_val = val;
-      goal_idx = i;
-    }
-  }
-
-  //search graph for shortest path
-  G_->runDijkstras(start_idx);
 };
 
 std::vector< std::vector<double> > Roadmap::
@@ -145,8 +148,8 @@ std::vector< std::vector<double> > Roadmap::
 sampleHammersley(int n) {
   std::cout << "sampling config space (HAMMERSLEY)" << std::endl;
   std::vector< std::vector<double> > sampled_points;
-  int iter = 0;
-  int k    = 1;
+  int iter  = 0;
+  int k     = 1;
   double x;
   double y;
   while(iter < n) {
@@ -178,7 +181,7 @@ sampleHammersley(int n) {
       continue;
     }
 
-    sampled_points.push_back({x, y}); //add to sampled points
+    sampled_points.push_back({x, y}); //add to sampled points  
   }
 
   return sampled_points;

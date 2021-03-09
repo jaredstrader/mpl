@@ -25,6 +25,7 @@ def definePolygons(xmin, xmax, ymin, ymax):
   print('CLICK LEFT...............add vertex for polygon.')
   print('CLICK MIDDLE.............remove most recent added point.')
   print('CLICK RIGHT..............stop input for current polygon. To stop selecting polygons, right click without adding vertices.\n')
+  print('The generate environment will be saved in the current directory as "configuration_space.txt"')
 
   polygons = []
   i=0

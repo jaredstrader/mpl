@@ -43,8 +43,11 @@ class Roadmap {
         cspace_.loadObstacles(filepath_obstacles);
       };
 
-      /** \brief Generate probabilistic roadmap. Based on [1] and [2].
+      ////////////////////////////////////////////////////////////////////////
+      //                            INTERFACE
+      ////////////////////////////////////////////////////////////////////////
 
+      /** \brief Generate probabilistic roadmap. Based on [1] and [2].
       [1] L. E. Kavraki, P. Švestka, J. C. Latombe, and M. H. Overmars, 
       “Probabilistic roadmaps for path planning in high-dimensional 
       configuration spaces,” IEEE Trans. Robot. Autom., 1996.
@@ -54,14 +57,12 @@ class Roadmap {
       void runPRM(int iterations, double radius, double step_size);
 
       /** \brief Generate quasi-random roadmap. Based on [1].
-
       [1] M. S. Branicky, S. M. Lavalle, K. Olson, and L. Yang, 
       “Quasi-Randomized Path Planning,” in IEEE International Conference on 
       Robotics and Automation, 2001, pp. 1481–1487. */
       void runQRM(int iterations, double radius, double step_size);
 
       /** \brief Generate lattice roadmap. Based on [1]. 
-
       [1] S. M. LaValle and M. S. Branicky, “On the relationship between 
       classical grid search and probabilistic roadmaps,” Int. J. Rob. Res., 
       vol. 23, no. 7–8, pp. 673–692, 2004.*/
@@ -71,21 +72,34 @@ class Roadmap {
       // void addVertex(std::vector<double> point);
 
       /** \brief ... */
-      void getPath(const std::vector<double> & src, 
-                   const std::vector<double> & dst);
+      void computePath(const std::vector<double> & src, 
+                       const std::vector<double> & dst);
 
-  protected:
-    /** \brief The configuration space represented as a CSpace object */
-    CSpace cspace_;
+      ////////////////////////////////////////////////////////////////////////
+      //                              MEMBERS
+      ////////////////////////////////////////////////////////////////////////
+      /** \brief The configuration space represented as a CSpace object */
+      CSpace cspace_;
 
-    /** \brief The graph representing the roadmap. The graph may weigted
-    or unweighted and directed or undirected. The edge weights may be 
-    positive or negative as long as no negative cycles exist. */
-    Graph * G_;
+      /** \brief The graph representing the roadmap. The graph may weigted
+      or unweighted and directed or undirected. The edge weights may be 
+      positive or negative as long as no negative cycles exist. */
+      Graph * G_;
 
-    /** \brief Sampled configurations where each index corresponds to the
-    graph indices. For example samples[i] corresponds to G_[i] */
-    std::vector< std::vector<double> > samples_;
+      /** \brief Sampled configurations where each index corresponds to the
+      graph indices. For example samples[i] corresponds to G_[i] */
+      std::vector< std::vector<double> > samples_;
+
+
+      ////////////////////////////////////////////////////////////////////////
+      //                              GETTERS
+      ////////////////////////////////////////////////////////////////////////
+      /** \brief Return vector of points where each point representd as
+      a vector */
+      std::vector< std::vector<double> > getVertices() const {return samples_;};
+
+      /** \brief Return pointer to graph representing the roadmap */
+      const Graph * getGraphPtr() const {return G_;};
 
   private:
     /** \brief Constants representing the sample types for the roadmap */
@@ -107,10 +121,12 @@ class Roadmap {
 
     /** \brief Sample Hammersley point set distributed in configuration
     space defined by cspace_. */
+    //TODO: automate connection radius
     std::vector< std::vector<double> > sampleHammersley(int n);
 
     /** \brief Sample lattice point set distributed in configuration
     space defined by cspace_. */
+    //TODO: automate connection radius
     std::vector< std::vector<double> > sampleLattice(int n);
 
     /** \brief Given points x and y, returns a point z that is "closer" to y 
