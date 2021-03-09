@@ -1,4 +1,4 @@
-**Warning! This library is in development and is incomplete!**  
+**Warning! This library is in development!**  
 
 # mpl
 Simple motion planning library in C++
