@@ -32,4 +32,14 @@ update-alternatives --config g++
 ```
 
 ### MatPlot++
-[Matplot++ v1.0.1](https://github.com/alandefreitas/matplotplusplus/releases) is required for visualization, but in the future, this requirement will be optional. For now, build and install the latest version of Matplot++ as described [here](https://alandefreitas.github.io/matplotplusplus/integration/install/build-from-source/build-and-install/).
+[Matplot++ v1.0.1](https://github.com/alandefreitas/matplotplusplus/releases) is required for visualization, but in the future, this requirement will be optional. For now, build and install the latest version of Matplot++:
+```
+wget https://github.com/alandefreitas/matplotplusplus/archive/v1.0.1.tar.gz
+tar -zxvf v1.0.1.tar.gz
+cd matplotplusplus-1.0.1
+mkdir build
+cd build
+cmake ..
+make
+make install
+```
