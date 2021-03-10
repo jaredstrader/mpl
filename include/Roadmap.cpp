@@ -1,11 +1,8 @@
 // -*-c++-*-
 //-----------------------------------------------------------------------------
 /**
- * @file  Roadmap.cpp
- *
- * <br>@b Author(s):    Jared Strader
- * <br>@b Date:         9/5/20
- *
+ * @file    Roadmap.cpp
+ * @author  Jared Strader
  */
 //-----------------------------------------------------------------------------
 
@@ -36,7 +33,7 @@ runLRM(int iterations, double radius, double step_size) {
 // void Roadmap::
 // addVertex(std::vector<double> point) {};
 
-void Roadmap::
+std::vector<int>  Roadmap::
 computePath(const std::vector<double> & start, 
             const std::vector<double> & goal) {
   double max_val;
@@ -63,8 +60,11 @@ computePath(const std::vector<double> & start,
     }
   }
 
-  //search graph for shortest path
-  G_->runDijkstras(start_idx);
+  //search and extract shortest path from graph
+  std::vector<int> pred = G_->runDijkstras(start_idx);
+  std::vector<int> p = G_->extractPath(pred, goal_idx);
+
+  return p;
 };
 
 //////////////////////////////////////////////////////////////////////////////
@@ -100,15 +100,12 @@ run(int iterations, double radius, double step_size, int sample_type) {
 
         //check if path is collision free
         std::vector< std::vector<double> > path;
-        bool success = true; //steer(samples_[i], samples_[j], radius, step_size, path);
+        bool success = steer(samples_[i], samples_[j], radius, step_size, path);
 
         //if collision free, add edge with weight
         if(success) {
           double w = utils::dist(samples_[i], samples_[j]);
           G_->addEdgeDirected(i,j,w);
-        }
-        else{
-          std::cout << "fail" << std::endl;
         }
       }
     }
@@ -264,13 +261,11 @@ step(const std::vector<double> & x,
      const std::vector<double> & y,
            double                step_size) const {
   assert(x.size() == y.size());
-
   double norm = utils::dist(x,y);
   std::vector<double> z;
   for(int i=0; i<x.size(); i++) {
-    z.push_back( step_size*(y[i] - x[i])/norm );
+    z.push_back( x[i] + step_size*(y[i] - x[i])/norm );
   }
-
   return z;
 }
 

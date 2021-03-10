@@ -18,6 +18,7 @@ bool CSpace::
 isFree(std::vector< std::vector<double> > pts) const {
   //loop through pts and return false if pt not in free space
   for(auto pt : pts) {
+    assert(pt.size() == 2);
     if(!isFree(pt)) {
       return false;
     }
@@ -70,12 +71,12 @@ loadConfigurationSpace(std::string filepath) {
   //close file
   input_file.close();
 
-  //print configuration space (only for testing)
-  std::cout << "\nLoaded Configuration Space:\n";
-  std::cout << "xmin = " << xmin << std::endl;
-  std::cout << "xmax = " << xmax << std::endl;
-  std::cout << "ymin = " << ymin << std::endl;
-  std::cout << "ymax = " << ymax << std::endl;
+  //print configuration space
+  // std::cout << "\nLoaded Configuration Space:\n";
+  // std::cout << "xmin = " << xmin << std::endl;
+  // std::cout << "xmax = " << xmax << std::endl;
+  // std::cout << "ymin = " << ymin << std::endl;
+  // std::cout << "ymax = " << ymax << std::endl;
 
   return true;
 };
@@ -119,20 +120,20 @@ loadObstacles(std::string filepath) {
   //close file
   input_file.close();
 
-  //print polygons (only for testing)
-  std::cout << "\nLoaded Obstacles:\n";
-  int k = 0;
-  for(auto obs : obstacles_) {
-    std::cout << "obstacle[" << k << "]:" << std::endl;
-    k++; 
-    for(int i=0; i<obs.pts.size(); i++) {
-      std::cout << "pt " << i << " =";
-      for(int j=0; j<obs.pts[i].size(); j++) {
-        std::cout << " " << obs.pts[i][j];
-      }
-      std::cout << std::endl;
-    }
-  }
+  //print polygons
+  // std::cout << "\nLoaded Obstacles:\n";
+  // int k = 0;
+  // for(auto obs : obstacles_) {
+  //   std::cout << "obstacle[" << k << "]:" << std::endl;
+  //   k++; 
+  //   for(int i=0; i<obs.pts.size(); i++) {
+  //     std::cout << "pt " << i << " =";
+  //     for(int j=0; j<obs.pts[i].size(); j++) {
+  //       std::cout << " " << obs.pts[i][j];
+  //     }
+  //     std::cout << std::endl;
+  //   }
+  // }
 
   return true;
 };

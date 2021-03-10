@@ -155,4 +155,41 @@ namespace utils
       return true;
   };
 
+  // bool inPolygon(Point point, Polygon polygon) {
+  // bool inPolygon(std::vector<double> p, std::vector< std::vector<double> > vertices) {
+  //   bool inside = false;
+
+  //   assert(p.size() == 2);
+  //   double x = p[0];
+  //   double y = p[0];
+
+  //   for(int i=0; i<vertices.size() - 1; i++) {
+  //     //vertices of edges
+  //     double xp0 = vertices[i][0];
+  //     double yp0 = vertices[i][1];
+  //     double xp1 = vertices[i+1][0];
+  //     double yp1 = vertices[i+1][1];
+
+  //     //
+  //     if(yp0 <= y && yp1 > y || yp1 <= y && yp0 >y) {
+  //       double c = (xp1-xp0)*(y-yp0)/(yp1-yp0) + xp0;
+  //       if(c < x) {
+  //         inside = !inside;
+  //       }
+  //     }
+  //   }
+  //   // vector<Point> points = polygon.getPoints();
+  //   // int i, j, nvert = points.size();
+  //   // bool c = false;
+
+  //   // for(i = 0, j = nvert - 1; i < nvert; j = i++) {
+  //   //   if( ( (points[i].y >= point.y ) != (points[j].y >= point.y) ) &&
+  //   //       (point.x <= (points[j].x - points[i].x) * (point.y - points[i].y) / (points[j].y - points[i].y) + points[i].x)
+  //   //     )
+  //   //     c = !c;
+  //   // }
+
+  //   return inside;
+  // }
+
 }

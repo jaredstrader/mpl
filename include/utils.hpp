@@ -15,6 +15,7 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <assert.h>
 
 namespace utils
 {

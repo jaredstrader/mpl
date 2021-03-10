@@ -1,11 +1,8 @@
 // -*-c++-*-
 //-----------------------------------------------------------------------------
 /**
- * @file  Roadmap.hpp
- *
- * <br>@b Author(s):    Jared Strader
- * <br>@b Date:         9/5/20
- *
+ * @file    Roadmap.hpp
+ * @author  Jared Strader
  */
 //-----------------------------------------------------------------------------
 
@@ -72,8 +69,8 @@ class Roadmap {
       // void addVertex(std::vector<double> point);
 
       /** \brief ... */
-      void computePath(const std::vector<double> & src, 
-                       const std::vector<double> & dst);
+      std::vector<int> computePath(const std::vector<double> & src, 
+                                   const std::vector<double> & dst);
 
       ////////////////////////////////////////////////////////////////////////
       //                              MEMBERS
@@ -90,16 +87,15 @@ class Roadmap {
       graph indices. For example samples[i] corresponds to G_[i] */
       std::vector< std::vector<double> > samples_;
 
-
       ////////////////////////////////////////////////////////////////////////
       //                              GETTERS
       ////////////////////////////////////////////////////////////////////////
       /** \brief Return vector of points where each point representd as
       a vector */
-      std::vector< std::vector<double> > getVertices() const {return samples_;};
+      // std::vector< std::vector<double> > getVertices() const {return samples_;};
 
       /** \brief Return pointer to graph representing the roadmap */
-      const Graph * getGraphPtr() const {return G_;};
+      // const Graph * getGraphPtr() const {return G_;};
 
   private:
     /** \brief Constants representing the sample types for the roadmap */

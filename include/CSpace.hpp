@@ -25,6 +25,12 @@ namespace mpl
 
 class CSpace {
   public:
+    /** \brief Struct for defining obstacles where pts[i] is a vector 
+    representing the ith vertex of the polygon representing the obstacle */
+    struct Obstacle {
+      std::vector< std::vector<double> > pts;
+    };
+
     /** \brief Default constructor. Does nothing. */
     inline CSpace() {};
 
@@ -35,11 +41,14 @@ class CSpace {
     :minimums_(minimums), 
      maximums_(maximums) {};
 
-     /** \brief */
+     /** \brief Return minimum of each dimension in the configuration space */
      const std::vector<double> getMinimums() const {return minimums_;};
 
-     /** \brief */
+     /** \brief Return maximum of each dimension in the configuration space */
      const std::vector<double> getMaximums() const {return maximums_;};
+
+     /** \brief Return vectors of obstacles */
+     const std::vector<Obstacle> getObstacles() const {return obstacles_;};
 
     /** \brief Load minimum and maximum values for each dimension of 
     configuration space from specified file */
@@ -59,12 +68,6 @@ class CSpace {
     bool isFree(std::vector<double> pt) const;
 
   private:
-    /** \brief Struct for defining obstacles where pts[i] is a vector 
-    representing the ith vertex of the polygon representing the obstacle */
-    struct Obstacle {
-      std::vector< std::vector<double> > pts;
-    };
-    
     /** \brief List of obstacles represented as an std::vector  */
     std::vector<Obstacle> obstacles_;
 
